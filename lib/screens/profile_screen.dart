@@ -8,32 +8,37 @@ class ProfileScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Perfil', style: TextStyle(fontSize: 24)),
+        title: const Text('Perfil',
+            style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Roboto')),
         backgroundColor: const Color.fromARGB(226, 161, 181, 255),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Nombre: ${args['name']}',
-              style: const TextStyle(fontSize: 22),
-            ),
-            const SizedBox(height: 10),
-            Text('Edad: ${args['age']}', style: const TextStyle(fontSize: 22)),
-            const SizedBox(height: 10),
-            Text('Ocupación: ${args['occupation']}',
-                style: const TextStyle(fontSize: 22)),
+            _buildProfileDetail('Nombre: ${args['name']}'),
+            _buildProfileDetail('Edad: ${args['age']}'),
+            _buildProfileDetail('Ocupación: ${args['occupation']}'),
             const SizedBox(height: 20),
             ElevatedButton.icon(
-              icon: const Icon(Icons.home, size: 30),
+              icon: const Icon(Icons.home, size: 32), // Icono actualizado
               label: const Text('Regresar a Inicio',
-                  style: TextStyle(fontSize: 18)),
+                  style: TextStyle(fontSize: 18, fontFamily: 'Roboto')),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(226, 161, 181, 255),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.circular(50), // Bordes más redondeados
+                  side: const BorderSide(
+                      color: Colors.white, width: 2), // Borde blanco
+                ),
               ),
               onPressed: () {
                 Navigator.popUntil(context, (route) => route.isFirst);
@@ -41,6 +46,17 @@ class ProfileScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildProfileDetail(String detail) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Text(
+        detail,
+        style: const TextStyle(
+            fontSize: 22, fontWeight: FontWeight.w500, fontFamily: 'Roboto'),
       ),
     );
   }
